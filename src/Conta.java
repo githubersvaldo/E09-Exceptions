@@ -24,16 +24,16 @@ public abstract class Conta implements ITaxas{
                 this.operacoes[proximaOperacao] = new OperacaoSaque(valor);
                 this.proximaOperacao++;
             } else {
-                throw new ValorNegativoException();
+                throw new ValorNegativoException("Digite um valor possitivo");
             }
         }else{
-            throw new SemLimiteExeption();
+            throw new SemLimiteExeption("Sem limite tente um valor menor");
         }
     }
 
     public void depositar(double valor) throws ValorNegativoException{
         if(valor <= 0) {
-            throw new ValorNegativoException();
+            throw new ValorNegativoException("Digite um valor possitivo");
         }
         this.saldo += valor;
         this.operacoes[proximaOperacao] = new OperacaoDeposito(valor);
@@ -47,10 +47,10 @@ public abstract class Conta implements ITaxas{
             try {
                 destino.depositar(valor);
             }catch (ValorNegativoException e) {
-                throw new ValorNegativoException();
+                throw new ValorNegativoException("Digite um valor possitivo");
             }
         }else{
-            throw new SemLimiteExeption();
+            throw new SemLimiteExeption("Sem limite tente um valor menor");
         }
     }
     @Override

@@ -9,13 +9,18 @@ public class Main {
         Conta cc = new ContaCorrente(pessoa);
 
         //Fazendo operações de saques e depósitos
-        cc.depositar(1000);
-        cc.depositar(2000);
-        cc.sacar(500);
-        cc.depositar(3000);
-        cc.sacar(10);
-        cc.sacar(15);
-
+        try {
+            cc.depositar(1000);
+            cc.depositar(2000);
+            cc.sacar(500);
+            cc.depositar(3000);
+            cc.sacar(10);
+            cc.sacar(15);
+        }catch (ValorNegativoException e){
+            System.out.println(e.getMessage());
+        }catch (SemLimiteExeption f){
+            System.out.println(f.getMessage());
+        }
         cc.imprimirExtrato();
         System.out.println(cc.getSaldo());
 

@@ -1,2 +1,5 @@
-public class SemLimiteExeption extends Exception {
+public class SemLimiteExeption extends IllegalArgumentException {
+    public SemLimiteExeption(String Mensagem) {
+        super(Mensagem);
+    }
 }
