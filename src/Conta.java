@@ -15,11 +15,20 @@ public abstract class Conta implements ITaxas{
     private static int totalContas = 0;
 
     public Conta() {}
-    public void sacar(double valor) {
-        this.saldo -= valor;
+    public void sacar(double valor)
+        throws ValorNegativoException,SemLimiteExeption{
+        if(valor > limite) {
+            if (valor < 0) {
+                this.saldo -= valor;
 
-        this.operacoes[proximaOperacao] = new OperacaoSaque(valor);
-        this.proximaOperacao++;
+                this.operacoes[proximaOperacao] = new OperacaoSaque(valor);
+                this.proximaOperacao++;
+            } else {
+                throw new ValorNegativoException();
+            }
+        }else{
+            throw new SemLimiteExeption();
+        }
     }
 
     public void depositar(double valor) throws ValorNegativoException{
@@ -31,7 +40,8 @@ public abstract class Conta implements ITaxas{
         this.proximaOperacao++;
     }
 
-    public void transferir(Conta destino, double valor) throws ValorNegativoException{
+    public void transferir(Conta destino, double valor)
+            throws ValorNegativoException,SemLimiteExeption{
         if (valor >= 0 && valor <= this.limite) {
             this.sacar(valor);
             try {
@@ -40,7 +50,7 @@ public abstract class Conta implements ITaxas{
                 throw new ValorNegativoException();
             }
         }else{
-
+            throw new SemLimiteExeption();
         }
     }
     @Override
