@@ -17,8 +17,8 @@ public abstract class Conta implements ITaxas{
     public Conta() {}
     public void sacar(double valor)
         throws ValorNegativoException,SemLimiteExeption{
-        if(valor > limite) {
-            if (valor < 0) {
+        if(valor < limite+saldo) {
+            if (valor > 0) {
                 this.saldo -= valor;
 
                 this.operacoes[proximaOperacao] = new OperacaoSaque(valor);
@@ -115,5 +115,5 @@ public abstract class Conta implements ITaxas{
         this.dono = dono;
     }
 
-    public abstract boolean setLimite(double limite);
+    public abstract double setLimite(double limite);
 }

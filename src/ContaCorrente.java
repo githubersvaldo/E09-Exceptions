@@ -16,11 +16,14 @@ public class ContaCorrente extends Conta implements ITaxas {
 
 
     @Override
-    public boolean setLimite(double limite) {
+    public double setLimite(double limite) throws SemLimiteExeption{
         if(limite > -100){
             this.limite = limite;
-            return true;
-        }else return false;
+            return this.limite;
+        }else{
+            throw new SemLimiteExeption("Limite insuficiente");
+
+        }
     }
     @Override
     public double calculaTaxas(){
