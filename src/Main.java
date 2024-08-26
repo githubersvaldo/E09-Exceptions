@@ -13,7 +13,7 @@ public class Main {
         try {
             cc.depositar(1000);
             cc.depositar(2000);
-            cc.sacar(500);
+            cc.sacar(-500);
             cc.depositar(3000);
             cc.sacar(10);
             cc.sacar(15);
@@ -21,6 +21,8 @@ public class Main {
             System.out.println(e.getMessage());
         }catch (SemLimiteExeption f){
             System.out.println(f.getMessage());
+        }catch (IllegalArgumentException o){
+            System.out.println(o.getMessage());
         }
         cc.imprimirExtrato();
         System.out.println(cc.getSaldo());
